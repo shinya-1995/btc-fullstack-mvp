@@ -1,0 +1,32 @@
+.form-container {
+  width: 50%;
+  /* margin-right: auto;
+  margin-left: auto; */
+  margin: auto;
+}
+
+.form-weitght {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.form-input {
+  padding: 20px 20px;
+  font-size: 20px;
+}
+
+.form-input::placeholder {
+  font-size: 20px;
+}
+
+.form-submit {
+  padding: 20px 0;
+  font-size: 20px;
+}
