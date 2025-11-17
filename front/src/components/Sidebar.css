@@ -28,13 +28,13 @@
   font-size: 30px;
 }
 
-.sidebar-data #icon {
+.sidebar-data .icon {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 30%;
 }
-.sidebar-data #title {
+.sidebar-data .title {
   flex: 70%;
 }
 

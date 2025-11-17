@@ -3,7 +3,7 @@ import Data from './Data';
 import Edit from './Edit';
 import Weight from './weight';
 import './Contents.css';
-import './data.css';
+
 import { Routes, Route } from 'react-router-dom';
 
 function Contents() {

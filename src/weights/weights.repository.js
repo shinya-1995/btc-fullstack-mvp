@@ -37,7 +37,16 @@ function createWeightrepository(knex, table = 'user_weights') {
 
     return getWeightData;
   };
-  return { submitWeight, getWeightDataOfWeek };
+  const getWeightEditData = async (param) => {
+    const getWeightEditData = await knex('user_weights')
+      .where({ user_id: 2 })
+      .andWhere('measured_at', param)
+      .select('weight', 'measured_at');
+
+    return getWeightEditData;
+  };
+
+  return { submitWeight, getWeightDataOfWeek, getWeightEditData };
 }
 
 module.exports = { createWeightrepository };

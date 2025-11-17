@@ -1,9 +1,9 @@
 import { sidebarData } from './sidebarData';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-import { useContext } from 'react';
-import { DataContext } from '../App';
+import { useContext, useRef } from 'react';
 import { getDataContext } from '../App';
+import { getEditDataContext } from '../App';
 
 function Sidebar() {
   const { getWeightData } = useContext(getDataContext);
@@ -17,11 +17,11 @@ function Sidebar() {
               <div key={key}>
                 <Link to={data.link} style={{ color: '#FFF' }}>
                   <li
-                    onClick={() => getWeightData('oneWeek')}
+                    onClick={(e) => getWeightData('oneWeek', e)}
                     className="sidebar-data"
                   >
-                    <div id="icon">{data.icon}</div>
-                    <div id="title">{data.title}</div>
+                    <div className="icon">{data.icon}</div>
+                    <div className="title">{data.title}</div>
                   </li>
                 </Link>
               </div>

@@ -5,7 +5,11 @@ function createWeightService(repository) {
   const getWeightDataOfWeek = async (param) => {
     return await repository.getWeightDataOfWeek(param);
   };
-  return { submitWeight, getWeightDataOfWeek };
+
+  const getWeightEditData = async (param) => {
+    return await repository.getWeightEditData(param);
+  };
+  return { submitWeight, getWeightDataOfWeek, getWeightEditData };
 }
 
 module.exports = { createWeightService };
