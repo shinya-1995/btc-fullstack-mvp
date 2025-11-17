@@ -8,7 +8,9 @@ function createWeightController(service) {
 
   const getWeightDataOfWeek = async (req, res) => {
     console.log('controller:呼ばれた');
-    const getWeightDataOfWeek = await service.getWeightDataOfWeek();
+    const getWeightDataOfWeek = await service.getWeightDataOfWeek(
+      req.params.period
+    );
 
     res.send(getWeightDataOfWeek);
   };

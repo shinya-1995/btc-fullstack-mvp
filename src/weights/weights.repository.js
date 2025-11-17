@@ -15,14 +15,25 @@ function createWeightrepository(knex, table = 'user_weights') {
     };
   };
 
-  const getWeightDataOfWeek = async () => {
-    console.log('repository:呼ばれた');
-
-    const getWeightData = await knex()
-      .where({ user_id: 2 })
-      .select('weight', 'measured_at')
-      .from('user_weights');
-    console.log(getWeightData);
+  const getWeightDataOfWeek = async (param) => {
+    let getWeightData;
+    if (param === 'oneWeek') {
+      getWeightData = await knex()
+        .where({ user_id: 2 })
+        .andWhere('measured_at', '>=', knex.raw(`NOW() - INTERVAL '7 days'`))
+        .select('weight', 'measured_at')
+        .from('user_weights');
+    } else if (param === 'oneMonth') {
+      getWeightData = await knex('user_weights')
+        .where('measured_at', '>=', knex.raw(`NOW() - INTERVAL '1 month'`))
+        .andWhere({ user_id: 2 })
+        .select('weight', 'measured_at');
+    } else {
+      getWeightData = await knex()
+        .where({ user_id: 2 })
+        .select('weight', 'measured_at')
+        .from('user_weights');
+    }
 
     return getWeightData;
   };

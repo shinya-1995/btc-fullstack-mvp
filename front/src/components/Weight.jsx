@@ -1,11 +1,11 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import './Weight.css';
 import InputCalender from './InputCalender';
 import dayjs from 'dayjs';
 
 function Weight() {
-  const formInputElement = useRef();
   const [value, setValue] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
+  const formInputElement = useRef();
 
   const fetchWeightData = async (e) => {
     e.preventDefault();

@@ -1,20 +1,12 @@
 import { sidebarData } from './sidebarData';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { DataContext } from '../App';
+import { getDataContext } from '../App';
 
 function Sidebar() {
-  const { setChartData } = useContext(DataContext);
-
-  const getWeightData = async () => {
-    const weightData = await fetch('./api/data', {
-      method: 'GET',
-    });
-    const JSONWeightData = await weightData.json();
-
-    setChartData(JSONWeightData);
-  };
+  const { getWeightData } = useContext(getDataContext);
 
   return (
     <>
@@ -24,7 +16,10 @@ function Sidebar() {
             return (
               <div key={key}>
                 <Link to={data.link} style={{ color: '#FFF' }}>
-                  <li onClick={getWeightData} className="sidebar-data">
+                  <li
+                    onClick={() => getWeightData('oneWeek')}
+                    className="sidebar-data"
+                  >
                     <div id="icon">{data.icon}</div>
                     <div id="title">{data.title}</div>
                   </li>

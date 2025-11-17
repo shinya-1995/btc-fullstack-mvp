@@ -4,28 +4,37 @@ import { DataContext } from '../App';
 import { useContext } from 'react';
 import './data.css';
 import dayjs from 'dayjs';
+import ToggleButton from './ToggleButton';
+import './data.css';
+// import { getWeightData } from './Sidebar';
+import { getDataContext } from '../App';
 
-const margin = {};
+const margin = { rigth: 50 };
 
 export default function Data() {
+  // グローバルステート取得
   const { chartData } = useContext(DataContext);
-  console.log(chartData);
+  //   const getWeightData = useContext(getDataContext);
+  // チャートの設定
   const xLabels = chartData.map((data) => {
     const day = dayjs(data.measured_at).format('YYYY-MM-DD');
     return day;
   });
-  console.log(xLabels);
   const dData = chartData.map((data) => data.weight);
-  console.log(dData);
 
   return (
-    <Box sx={{ width: '70%', height: 300 }}>
-      <LineChart
-        series={[{ data: dData, label: '体重' }]}
-        xAxis={[{ scaleType: 'point', data: xLabels }]}
-        yAxis={[{ width: 60 }]}
-        margin={margin}
-      />
-    </Box>
+    <div className="data">
+      <div className="togglebutton-layout">
+        <ToggleButton></ToggleButton>
+      </div>
+      <Box sx={{ width: '100%', height: 800 }}>
+        <LineChart
+          series={[{ data: dData, label: '体重' }]}
+          xAxis={[{ scaleType: 'point', data: xLabels }]}
+          yAxis={[{ width: 100 }]}
+          margin={margin}
+        />
+      </Box>
+    </div>
   );
 }
