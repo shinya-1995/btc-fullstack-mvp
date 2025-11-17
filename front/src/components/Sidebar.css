@@ -24,6 +24,10 @@
   cursor: pointer;
 }
 
+.sidebar div {
+  font-size: 30px;
+}
+
 .sidebar-data #icon {
   display: flex;
   align-items: center;

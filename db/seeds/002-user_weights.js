@@ -9,20 +9,20 @@ exports.seed = async function (knex) {
     {
       user_id: 1,
       weight: 66.0,
-      created_at: knex.fn.now(),
-      updated_at: knex.fn.now(),
+      inputed_at: knex.fn.now(),
+      measured_at: '2025-10-05',
     },
     {
       user_id: 2,
       weight: 49,
-      created_at: knex.fn.now(),
-      updated_at: knex.fn.now(),
+      inputed_at: knex.fn.now(),
+      measured_at: '2025-10-06',
     },
     {
       user_id: 3,
       weight: 67,
-      created_at: knex.fn.now(),
-      updated_at: knex.fn.now(),
+      inputed_at: knex.fn.now(),
+      measured_at: '2025-11-05',
     },
   ]);
 };
