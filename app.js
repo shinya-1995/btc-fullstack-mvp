@@ -26,10 +26,10 @@ function buildApp() {
     next();
   }
 
-  app.post('/api/weight', weightController.submitWeightData);
-  app.get('/api/data/:period', weightController.getWeightDataOfWeek);
-  app.get('/api/edit/:date', weightController.getWeightEditData);
-  app.patch('/api/weight/:date', weightController.patchWeightEditData);
+  app.post('/api/weights', weightController.submitWeightData);
+  app.get('/api/weights/:period', weightController.getWeightDataOfWeek);
+  app.get('/api/weights/:date', weightController.getWeightEditData);
+  app.patch('/api/weights/:date', weightController.patchWeightEditData);
   return app;
 }
 

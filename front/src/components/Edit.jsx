@@ -16,7 +16,7 @@ function Edit() {
   useEffect(() => {
     const getEditWeightData = async () => {
       const weightData = await fetch(
-        './api/edit/' + dayjs(editValue).format('YYYY-MM-DD'),
+        './api/weights/' + dayjs(editValue).format('YYYY-MM-DD'),
         {
           method: 'GET',
         }
@@ -32,7 +32,7 @@ function Edit() {
     e.preventDefault();
     const weightBody = formEditElement.current.value;
     const fetchedData = await fetch(
-      '/api/weight/' + dayjs(editValue).format('YYYY-MM-DD'),
+      '/api/weights/' + dayjs(editValue).format('YYYY-MM-DD'),
       {
         method: 'PATCH',
         headers: {

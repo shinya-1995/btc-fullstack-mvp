@@ -1,9 +1,8 @@
 import { sidebarData } from './sidebarData';
 import { Link } from 'react-router-dom';
 import './Sidebar.css';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 import { getDataContext } from '../App';
-import { getEditDataContext } from '../App';
 
 function Sidebar() {
   const { getWeightData } = useContext(getDataContext);

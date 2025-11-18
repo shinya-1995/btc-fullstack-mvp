@@ -1,34 +1,26 @@
 import './App.css';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import Sidebar from './components/Sidebar';
-import dayjs from 'dayjs';
 import Contents from './components/Contents';
 export const DataContext = createContext(null);
 export const ToggleButtonContext = createContext(null);
 export const getDataContext = createContext(null);
 export const getEditDataContext = createContext(null);
+export const getHomeWeightData = createContext(null);
 
 function App() {
   const [chartData, setChartData] = useState([]);
   const [toggleButton, setToggleButton] = useState('oneWeek');
   const [editData, setEditData] = useState({ weight: '', measured_at: '' });
+  const [homeData, setHomeData] = useState(null);
 
-  const getWeightData = async (param, e) => {
-    let listText;
-    if (e.currentTarget.tagName === 'BUTTON') {
-      listText = e.currentTarget.id;
-    } else {
-      listText = e.currentTarget.querySelector('.title').innerText;
-    }
-    if (listText === '記録を修正') {
-    } else {
-      const weightData = await fetch('./api/data/' + param, {
-        method: 'GET',
-      });
-      const JSONWeightData = await weightData.json();
-
-      setChartData(JSONWeightData);
-    }
+  const getWeightData = async (param) => {
+    const weightData = await fetch('./api/weights/' + param, {
+      method: 'GET',
+    });
+    const JSONWeightData = await weightData.json();
+    setHomeData(JSONWeightData.at(-1).weight);
+    setChartData(JSONWeightData);
   };
 
   return (
@@ -40,7 +32,9 @@ function App() {
             <ToggleButtonContext.Provider
               value={{ toggleButton, setToggleButton }}
             >
-              <Contents></Contents>
+              <getHomeWeightData.Provider value={{ homeData, setHomeData }}>
+                <Contents></Contents>
+              </getHomeWeightData.Provider>
             </ToggleButtonContext.Provider>
           </getEditDataContext.Provider>
         </getDataContext.Provider>

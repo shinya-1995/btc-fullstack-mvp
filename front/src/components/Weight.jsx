@@ -12,7 +12,7 @@ function Weight() {
     e.preventDefault();
     const weightBody = formInputElement.current.value;
 
-    const fetchedData = await fetch('/api/weight', {
+    const fetchedData = await fetch('/api/weights', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
