@@ -2,7 +2,7 @@ import Home from './Home';
 import Data from './Data';
 import Edit from './Edit';
 import Weight from './Weight';
-import './Contents.css';
+import './contents.css';
 
 import { Routes, Route } from 'react-router-dom';
 
