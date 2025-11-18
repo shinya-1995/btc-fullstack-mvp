@@ -6,8 +6,6 @@ import './data.css';
 import dayjs from 'dayjs';
 import ToggleButton from './ToggleButton';
 import './data.css';
-// import { getWeightData } from './Sidebar';
-import { getDataContext } from '../App';
 
 const margin = { rigth: 50 };
 

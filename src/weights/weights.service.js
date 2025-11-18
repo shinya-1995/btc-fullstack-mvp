@@ -9,7 +9,15 @@ function createWeightService(repository) {
   const getWeightEditData = async (param) => {
     return await repository.getWeightEditData(param);
   };
-  return { submitWeight, getWeightDataOfWeek, getWeightEditData };
+  const patchWeightEditData = async (param, bodyData) => {
+    return await repository.patchWeightEditData(param, bodyData);
+  };
+  return {
+    submitWeight,
+    getWeightDataOfWeek,
+    getWeightEditData,
+    patchWeightEditData,
+  };
 }
 
 module.exports = { createWeightService };

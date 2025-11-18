@@ -1,9 +1,38 @@
 const dayjs = require('dayjs');
+require('dayjs/locale/ja');
+const timezone = require('dayjs/plugin/timezone');
+const utc = require('dayjs/plugin/utc');
+
+// UTCプラグインを読み込み
+dayjs.extend(utc);
+// timezoneプラグインを読み込み
+dayjs.extend(timezone);
+// 日本語化
+dayjs.locale('ja');
+// タイムゾーンのデフォルトをJST化
+dayjs.tz.setDefault('Asia/Tokyo');
 
 function createWeightrepository(knex, table = 'user_weights') {
   const submitWeight = async (body) => {
-    const gotWeightData = await knex(table).insert(body).returning('*');
+    const isWeightData = await knex(table)
+      .where({ user_id: 2 })
+      .andWhere('measured_at', dayjs(body.measured_at).format('YYYY-MM-DD'))
+      .select('*');
 
+    if (isWeightData.length !== 0)
+      return {
+        ok: false,
+        status: 409,
+        message: 'すでにデータが存在しています',
+      };
+
+    const FormatedBody = {
+      user_id: 2,
+      measured_at: dayjs(body.measured_at).format('YYYY-MM-DD'),
+      weight: '56',
+    };
+
+    const gotWeightData = await knex(table).insert(FormatedBody).returning('*');
     const { id, user_id, measured_at, weight, inputed_at } = gotWeightData[0];
 
     return {
@@ -12,6 +41,7 @@ function createWeightrepository(knex, table = 'user_weights') {
       measured_at: dayjs(measured_at).format('YYYY-MM-DD'),
       weight,
       inputed_at,
+      message: '登録完了',
     };
   };
 
@@ -45,8 +75,22 @@ function createWeightrepository(knex, table = 'user_weights') {
 
     return getWeightEditData;
   };
+  const patchWeightEditData = async (param, bodyData) => {
+    const patchWeightEditData = await knex('user_weights')
+      .where({ user_id: 2 })
+      .andWhere('measured_at', param)
+      .update({ weight: bodyData })
+      .returning('*');
 
-  return { submitWeight, getWeightDataOfWeek, getWeightEditData };
+    return patchWeightEditData;
+  };
+
+  return {
+    submitWeight,
+    getWeightDataOfWeek,
+    getWeightEditData,
+    patchWeightEditData,
+  };
 }
 
 module.exports = { createWeightrepository };

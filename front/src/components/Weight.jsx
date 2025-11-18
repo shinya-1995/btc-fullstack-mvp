@@ -5,11 +5,13 @@ import dayjs from 'dayjs';
 
 function Weight() {
   const [value, setValue] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
+  const [isWeightData, setIsWeightData] = useState({});
   const formInputElement = useRef();
 
   const fetchWeightData = async (e) => {
     e.preventDefault();
     const weightBody = formInputElement.current.value;
+
     const fetchedData = await fetch('/api/weight', {
       method: 'POST',
       headers: {
@@ -23,7 +25,7 @@ function Weight() {
     });
 
     const fetchedJSON = await fetchedData.json();
-    console.log('登録されたデータ：' + fetchedJSON.weight + 'kg');
+    setIsWeightData(fetchedJSON);
   };
   return (
     <div className="form-container">
@@ -57,6 +59,22 @@ function Weight() {
           value="記 録"
         />
       </form>
+      {isWeightData.message === 'すでにデータが存在しています' ? (
+        <p
+          className="caution"
+          style={{
+            marginTop: 20,
+            fontSize: 25,
+            color: 'red',
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
+          ※{isWeightData.message}
+        </p>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

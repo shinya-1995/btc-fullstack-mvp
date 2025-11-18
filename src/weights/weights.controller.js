@@ -1,13 +1,13 @@
 function createWeightController(service) {
   const submitWeightData = async (req, res) => {
     const body = await req.body;
+
     const submitData = await service.submitWeight(body);
 
     res.send(submitData);
   };
 
   const getWeightDataOfWeek = async (req, res) => {
-    // console.log('controller:呼ばれた');
     const getWeightDataOfWeek = await service.getWeightDataOfWeek(
       req.params.period
     );
@@ -17,11 +17,35 @@ function createWeightController(service) {
 
   const getWeightEditData = async (req, res) => {
     const getWeightEditData = await service.getWeightEditData(req.params.date);
-    console.log(getWeightEditData.at(-1));
 
-    res.send(getWeightEditData.at(-1));
+    if (getWeightEditData.length === 0) {
+      res.send({
+        weight: 'データがありません',
+      });
+    } else {
+      res.send(getWeightEditData.at(-1));
+    }
   };
-  return { submitWeightData, getWeightDataOfWeek, getWeightEditData };
+  const patchWeightEditData = async (req, res) => {
+    const patchWeightEditData = await service.patchWeightEditData(
+      req.params.date,
+      req.body.weight
+    );
+
+    if (patchWeightEditData.length === 0) {
+      res.send({
+        weight: 'データがありません',
+      });
+    } else {
+      res.send(patchWeightEditData.at(-1));
+    }
+  };
+  return {
+    submitWeightData,
+    getWeightDataOfWeek,
+    getWeightEditData,
+    patchWeightEditData,
+  };
 }
 
 module.exports = { createWeightController };

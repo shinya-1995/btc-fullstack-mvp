@@ -11,8 +11,8 @@ export default function ToggleButton() {
 
   // ボタンの処理
   const toggleClick = (e) => {
-    setToggleButton(e.target.id);
-    getWeightData(e.target.id);
+    setToggleButton(e.currentTarget.id);
+    getWeightData(e.currentTarget.id, e);
   };
 
   return (

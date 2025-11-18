@@ -11,22 +11,22 @@ export const getEditDataContext = createContext(null);
 function App() {
   const [chartData, setChartData] = useState([]);
   const [toggleButton, setToggleButton] = useState('oneWeek');
-  const [editData, setEditData] = useState(null);
+  const [editData, setEditData] = useState({ weight: '', measured_at: '' });
 
   const getWeightData = async (param, e) => {
-    const listText = e.currentTarget.querySelector('.title').innerText;
-    if (listText === '記録を修正') {
-      const today = dayjs(new Date()).format('YYYY-MM-DD');
-      const weightData = await fetch('./api/edit' + today, {
-        method: 'GET',
-      });
-      const JSONWeightData = await weightData.json();
-      setEditData(JSONWeightData);
+    let listText;
+    if (e.currentTarget.tagName === 'BUTTON') {
+      listText = e.currentTarget.id;
     } else {
-      const weightData = await fetch('./api/data' + param, {
+      listText = e.currentTarget.querySelector('.title').innerText;
+    }
+    if (listText === '記録を修正') {
+    } else {
+      const weightData = await fetch('./api/data/' + param, {
         method: 'GET',
       });
       const JSONWeightData = await weightData.json();
+
       setChartData(JSONWeightData);
     }
   };

@@ -4,13 +4,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 
-export default function InputCalender({ value, setValue }) {
+export default function EditCalender({ setEditValue, editValue }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker
-          value={dayjs(value)}
-          onChange={(newValue) => setValue(newValue)}
+          value={dayjs(editValue)}
+          onChange={(newValue) => setEditValue(newValue)}
         />
       </DemoContainer>
     </LocalizationProvider>

@@ -27,8 +27,9 @@ function buildApp() {
   }
 
   app.post('/api/weight', weightController.submitWeightData);
-  app.get('/api/data:period', weightController.getWeightDataOfWeek);
-  app.get('/api/edit:date', weightController.getWeightEditData);
+  app.get('/api/data/:period', weightController.getWeightDataOfWeek);
+  app.get('/api/edit/:date', weightController.getWeightEditData);
+  app.patch('/api/weight/:date', weightController.patchWeightEditData);
   return app;
 }
 
