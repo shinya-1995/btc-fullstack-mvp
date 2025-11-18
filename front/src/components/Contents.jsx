@@ -1,7 +1,7 @@
-import Home from './home';
+import Home from './Home';
 import Data from './Data';
 import Edit from './Edit';
-import Weight from './weight';
+import Weight from './Weight';
 import './Contents.css';
 
 import { Routes, Route } from 'react-router-dom';
