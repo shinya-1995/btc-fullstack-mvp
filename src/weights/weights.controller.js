@@ -17,6 +17,7 @@ function createWeightController(service) {
 
   const getWeightEditData = async (req, res) => {
     const getWeightEditData = await service.getWeightEditData(req.params.date);
+    console.log(getWeightEditData.length === 0);
 
     if (getWeightEditData.length === 0) {
       res.send({

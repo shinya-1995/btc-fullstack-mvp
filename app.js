@@ -2,7 +2,6 @@ const express = require('express');
 const knex = require('./knex');
 
 const { initWeight } = require('./src/weights/index');
-const { log } = require('node:console');
 
 function buildApp() {
   const app = express();
@@ -28,7 +27,7 @@ function buildApp() {
 
   app.post('/api/weights', weightController.submitWeightData);
   app.get('/api/weights/:period', weightController.getWeightDataOfWeek);
-  app.get('/api/weights/:date', weightController.getWeightEditData);
+  app.get('/api/weights/date/:date', weightController.getWeightEditData);
   app.patch('/api/weights/:date', weightController.patchWeightEditData);
   return app;
 }

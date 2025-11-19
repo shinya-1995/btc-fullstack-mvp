@@ -48,30 +48,32 @@ function createWeightrepository(knex, table = 'user_weights') {
   const getWeightDataOfWeek = async (param) => {
     let getWeightData;
     if (param === 'oneWeek') {
-      getWeightData = await knex()
+      getWeightData = await knex('user_weights')
         .where({ user_id: 2 })
         .andWhere('measured_at', '>=', knex.raw(`NOW() - INTERVAL '7 days'`))
-        .select('weight', 'measured_at')
-        .from('user_weights');
+        .select('weight', 'measured_at');
     } else if (param === 'oneMonth') {
       getWeightData = await knex('user_weights')
         .where('measured_at', '>=', knex.raw(`NOW() - INTERVAL '1 month'`))
         .andWhere({ user_id: 2 })
         .select('weight', 'measured_at');
     } else {
-      getWeightData = await knex()
+      getWeightData = await knex('user_weights')
         .where({ user_id: 2 })
-        .select('weight', 'measured_at')
-        .from('user_weights');
+        .select('weight', 'measured_at');
     }
 
     return getWeightData;
   };
   const getWeightEditData = async (param) => {
+    console.log(param);
+
     const getWeightEditData = await knex('user_weights')
       .where({ user_id: 2 })
       .andWhere('measured_at', param)
-      .select('weight', 'measured_at');
+      .select('weight', 'measured_at')
+      .from('user_weights');
+    console.log(getWeightEditData);
 
     return getWeightEditData;
   };

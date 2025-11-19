@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import './Weight.css';
-import InputCalender from './InputCalender';
 import dayjs from 'dayjs';
 import { getEditDataContext } from '../App';
 import EditCalender from './EditCalender';
@@ -16,17 +15,23 @@ function Edit() {
   useEffect(() => {
     const getEditWeightData = async () => {
       const weightData = await fetch(
-        './api/weights/' + dayjs(editValue).format('YYYY-MM-DD'),
+        './api/weights/date/' + dayjs(editValue).format('YYYY-MM-DD'),
         {
           method: 'GET',
         }
       );
 
       const JSONWeightData = await weightData.json();
+      console.log(JSONWeightData);
+
       setEditData(JSONWeightData);
     };
     getEditWeightData();
   }, [editValue]);
+
+  useEffect(() => {
+    console.log(editValue);
+  });
 
   const patchWeightData = async (e) => {
     e.preventDefault();
@@ -44,7 +49,6 @@ function Edit() {
       }
     );
     console.log('fetch:' + fetchedData);
-    // console.log(await fetchedData.json());
   };
   return (
     <div className="form-container">
@@ -69,7 +73,9 @@ function Edit() {
             type="text"
             placeholder="例：〇〇.〇"
             ref={formEditElement}
-            defaultValue={editData.weight}
+            // defaultValue={editData.weight}
+            value={editData.weight}
+            onChange={(newValue) => setEditData(newValue.weight)}
           />
         </label>
         <input
