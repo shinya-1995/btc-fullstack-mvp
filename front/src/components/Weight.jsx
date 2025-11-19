@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import './Weight.css';
 import InputCalender from './InputCalender';
 import dayjs from 'dayjs';
+import Sidebar from './Sidebar';
 
 function Weight() {
   const [value, setValue] = useState(dayjs(new Date()).format('YYYY-MM-DD'));
@@ -28,54 +29,59 @@ function Weight() {
     setIsWeightData(fetchedJSON);
   };
   return (
-    <div className="form-container">
-      <h1>体重を記録</h1>
-      <form className="form-weitght" method="post">
-        <label className="form-label" htmlFor="form-input">
-          測定日：
-          <InputCalender
-            id="form-input"
-            className="form-input"
-            type="text"
-            placeholder=""
-            setValue={setValue}
-            value={value}
-          />
-        </label>
-        <label className="form-label" htmlFor="form-input">
-          体重：
-          <input
-            id="form-input"
-            className="form-input"
-            type="text"
-            placeholder="例：〇〇.〇"
-            ref={formInputElement}
-          />
-        </label>
-        <input
-          onClick={fetchWeightData}
-          className="form-submit"
-          type="submit"
-          value="記 録"
-        />
-      </form>
-      {isWeightData.message === 'すでにデータが存在しています' ? (
-        <p
-          className="caution"
-          style={{
-            marginTop: 20,
-            fontSize: 25,
-            color: 'red',
-            fontWeight: 'bold',
-            textAlign: 'center',
-          }}
-        >
-          ※{isWeightData.message}
-        </p>
-      ) : (
-        ''
-      )}
-    </div>
+    <>
+      <div className="page-layout">
+        <Sidebar></Sidebar>
+        <div className="form-container">
+          <h1>体重を記録</h1>
+          <form className="form-weitght" method="post">
+            <label className="form-label" htmlFor="form-input">
+              測定日：
+              <InputCalender
+                id="form-input"
+                className="form-input"
+                type="text"
+                placeholder=""
+                setValue={setValue}
+                value={value}
+              />
+            </label>
+            <label className="form-label" htmlFor="form-input">
+              体重：
+              <input
+                id="form-input"
+                className="form-input"
+                type="text"
+                placeholder="例：〇〇.〇"
+                ref={formInputElement}
+              />
+            </label>
+            <input
+              onClick={fetchWeightData}
+              className="form-submit"
+              type="submit"
+              value="記 録"
+            />
+          </form>
+          {isWeightData.message === 'すでにデータが存在しています' ? (
+            <p
+              className="caution"
+              style={{
+                marginTop: 20,
+                fontSize: 25,
+                color: 'red',
+                fontWeight: 'bold',
+                textAlign: 'center',
+              }}
+            >
+              ※{isWeightData.message}
+            </p>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 

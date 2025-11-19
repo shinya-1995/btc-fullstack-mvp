@@ -1,0 +1,17 @@
+.page-layout {
+  display: flex;
+}
+.main-layout {
+  margin: auto;
+  text-align: center;
+}
+
+.botton-layout {
+  text-align: right;
+  margin-bottom: 50px;
+}
+.logout {
+  width: 150px;
+  margin-right: 100px;
+  margin-left: auto;
+}

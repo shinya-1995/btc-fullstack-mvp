@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import './data.css';
 import dayjs from 'dayjs';
 import ToggleButton from './ToggleButton';
+import Sidebar from './Sidebar';
 import './data.css';
 
 const margin = { rigth: 50 };
@@ -21,18 +22,21 @@ export default function Data() {
   const dData = chartData.map((data) => data.weight);
 
   return (
-    <div className="data">
-      <div className="togglebutton-layout">
-        <ToggleButton></ToggleButton>
+    <div className="page-layout">
+      <Sidebar></Sidebar>
+      <div className="data">
+        <div className="togglebutton-layout">
+          <ToggleButton></ToggleButton>
+        </div>
+        <Box sx={{ width: '100%', height: 800 }}>
+          <LineChart
+            series={[{ data: dData, label: '体重' }]}
+            xAxis={[{ scaleType: 'point', data: xLabels }]}
+            yAxis={[{ width: 100 }]}
+            margin={margin}
+          />
+        </Box>
       </div>
-      <Box sx={{ width: '100%', height: 800 }}>
-        <LineChart
-          series={[{ data: dData, label: '体重' }]}
-          xAxis={[{ scaleType: 'point', data: xLabels }]}
-          yAxis={[{ width: 100 }]}
-          margin={margin}
-        />
-      </Box>
     </div>
   );
 }

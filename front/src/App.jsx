@@ -1,7 +1,17 @@
 import './App.css';
 import { createContext, useState } from 'react';
 import Sidebar from './components/Sidebar';
-import Contents from './components/Contents';
+// import Contents from './components/Contents';
+import Signup from './components/Signup';
+import { AuthProvider } from './context/AuthContext';
+import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import Home from './components/Home';
+import Data from './components/Data';
+import Edit from './components/Edit';
+import Weight from './components/Weight';
+import Login from './components/Login';
+import './components/contents.css';
+
 export const DataContext = createContext(null);
 export const ToggleButtonContext = createContext(null);
 export const getDataContext = createContext(null);
@@ -31,13 +41,21 @@ function App() {
       <DataContext.Provider value={{ chartData, setChartData }}>
         <getDataContext.Provider value={{ getWeightData }}>
           <getEditDataContext.Provider value={{ editData, setEditData }}>
-            <Sidebar></Sidebar>
             <ToggleButtonContext.Provider
               value={{ toggleButton, setToggleButton }}
             >
-              <getHomeWeightData.Provider value={{ homeData, setHomeData }}>
-                <Contents></Contents>
-              </getHomeWeightData.Provider>
+              <AuthProvider>
+                <getHomeWeightData.Provider value={{ homeData, setHomeData }}>
+                  <Routes>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/home" element={<Home />} />
+                    <Route path="/data" element={<Data className="data" />} />
+                    <Route path="/edit" element={<Edit />} />
+                    <Route path="/weight" element={<Weight />} />
+                  </Routes>
+                </getHomeWeightData.Provider>
+              </AuthProvider>
             </ToggleButtonContext.Provider>
           </getEditDataContext.Provider>
         </getDataContext.Provider>

@@ -2,7 +2,9 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import './Weight.css';
 import dayjs from 'dayjs';
 import { getEditDataContext } from '../App';
+import Sidebar from './Sidebar';
 import EditCalender from './EditCalender';
+import './layoutStyle.css';
 
 function Edit() {
   const { editData, setEditData } = useContext(getEditDataContext);
@@ -51,41 +53,46 @@ function Edit() {
     console.log('fetch:' + fetchedData);
   };
   return (
-    <div className="form-container">
-      <h1>体重を修正</h1>
-      <form className="form-weitght" method="post">
-        <label className="form-label" htmlFor="form-input">
-          修正する測定日を選択：
-          <EditCalender
-            id="form-input"
-            className="form-input"
-            type="text"
-            placeholder=""
-            setEditValue={setEditValue}
-            editValue={editValue}
-          />
-        </label>
-        <label className="form-label" htmlFor="form-input">
-          体重：
-          <input
-            id="form-input"
-            className="form-input"
-            type="text"
-            placeholder="例：〇〇.〇"
-            ref={formEditElement}
-            // defaultValue={editData.weight}
-            value={editData.weight}
-            onChange={(newValue) => setEditData(newValue.weight)}
-          />
-        </label>
-        <input
-          onClick={patchWeightData}
-          className="form-submit"
-          type="submit"
-          value="記 録"
-        />
-      </form>
-    </div>
+    <>
+      <div className="page-layout">
+        <Sidebar></Sidebar>
+        <div className="form-container">
+          <h1>体重を修正</h1>
+          <form className="form-weitght" method="post">
+            <label className="form-label" htmlFor="form-input">
+              修正する測定日を選択：
+              <EditCalender
+                id="form-input"
+                className="form-input"
+                type="text"
+                placeholder=""
+                setEditValue={setEditValue}
+                editValue={editValue}
+              />
+            </label>
+            <label className="form-label" htmlFor="form-input">
+              体重：
+              <input
+                id="form-input"
+                className="form-input"
+                type="text"
+                placeholder="例：〇〇.〇"
+                ref={formEditElement}
+                // defaultValue={editData.weight}
+                value={editData.weight}
+                onChange={(newValue) => setEditData(newValue.weight)}
+              />
+            </label>
+            <input
+              onClick={patchWeightData}
+              className="form-submit"
+              type="submit"
+              value="記 録"
+            />
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 
