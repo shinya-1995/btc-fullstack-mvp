@@ -3,7 +3,9 @@
  * @returns { Promise<void> }
  */
 exports.seed = async function (knex) {
+  await knex('user_weights').del();
   await knex('users').del();
+  await knex.raw("SELECT SETVAL ('users_id_seq', 1, false)");
   await knex('users').insert([
     {
       name: 'itadori',
