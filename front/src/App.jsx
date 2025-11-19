@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 // import Contents from './components/Contents';
 import Signup from './components/Signup';
 import { AuthProvider } from './context/AuthContext';
-import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Data from './components/Data';
 import Edit from './components/Edit';
@@ -46,14 +46,17 @@ function App() {
             >
               <AuthProvider>
                 <getHomeWeightData.Provider value={{ homeData, setHomeData }}>
-                  <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/signup" element={<Signup />} />
-                    <Route path="/home" element={<Home />} />
-                    <Route path="/data" element={<Data className="data" />} />
-                    <Route path="/edit" element={<Edit />} />
-                    <Route path="/weight" element={<Weight />} />
-                  </Routes>
+                  <BrowserRouter>
+                    {' '}
+                    <Routes>
+                      <Route path="/login" element={<Login />} />
+                      <Route path="/signup" element={<Signup />} />
+                      <Route path="/home" element={<Home />} />
+                      <Route path="/data" element={<Data className="data" />} />
+                      <Route path="/edit" element={<Edit />} />
+                      <Route path="/weight" element={<Weight />} />
+                    </Routes>
+                  </BrowserRouter>
                 </getHomeWeightData.Provider>
               </AuthProvider>
             </ToggleButtonContext.Provider>

@@ -2,31 +2,30 @@ import { useRef, useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthContext } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Signup() {
   const emailRef = useRef(null);
   const emailPassword = useRef(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
     console.log(email.value, password.value);
-    createUserWithEmailAndPassword(auth, email.value, password.value);
-  };
-
-  const handleChangeEmail = (event) => {
-    setEmail(event.currentTarget.value);
-  };
-  const handleChangePassword = (event) => {
-    setPassword(event.currentTarget.value);
+    try {
+      await createUserWithEmailAndPassword(auth, email.value, password.value);
+      navigate('../home');
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
     <div style={{ margin: '2em' }}>
       <h1>ユーザ登録</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>メールアドレス</label>
@@ -35,7 +34,7 @@ function Signup() {
             type="email"
             placeholder="email"
             ref={emailRef}
-            onChange={(event) => handleChangeEmail(event)}
+            // onChange={(event) => handleChangeEmail(event)}
           />
         </div>
         <div>
@@ -44,13 +43,13 @@ function Signup() {
             name="password"
             type="password"
             ref={emailPassword}
-            onChange={(event) => handleChangePassword(event)}
+            // onChange={(event) => handleChangePassword(event)}
           />
         </div>
         <div>
-          <Link to={'/home'}>
-            <button>登録</button>
-          </Link>
+          {/* <Link to={'/home'}> */}
+          <button type="submit">登録</button>
+          {/* </Link> */}
         </div>
       </form>
     </div>

@@ -1,11 +1,14 @@
+import { Link, useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../firebase';
-import { Link } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const { email, password } = event.target.elements;
-    auth.signInWithEmailAndPassword(email.value, password.value);
+    signInWithEmailAndPassword(auth, email.value, password.value);
+    navigate('../home');
   };
 
   return (
