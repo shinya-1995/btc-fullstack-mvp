@@ -19,6 +19,9 @@ function App() {
       method: 'GET',
     });
     const JSONWeightData = await weightData.json();
+    console.log(JSONWeightData);
+    if (JSONWeightData.length === 0) return;
+
     setHomeData(JSONWeightData.at(-1).weight);
     setChartData(JSONWeightData);
   };

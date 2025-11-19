@@ -62,6 +62,12 @@ function createWeightrepository(knex, table = 'user_weights') {
         .where({ user_id: 2 })
         .select('weight', 'measured_at');
     }
+    if (getWeightData.length === 0) {
+      getWeightData = await knex('user_weights')
+        .where({ user_id: 2 })
+        .select('weight', 'measured_at');
+      return getWeightData;
+    }
 
     return getWeightData;
   };
