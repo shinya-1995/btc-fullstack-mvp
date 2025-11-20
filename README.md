@@ -27,8 +27,51 @@
 
 
 <h2>📈アプリ使用方法</h2>
+
+postgresコマンドでDATA BASEを作成してください
+
 ```sh
 psql CREATE DATABASE <YOUR DB_NAME> 
 ```
+
+元のターミナルに移動
+
+```sh
+\q
+```
+
+
+
+.envファイルを作成し下記のように記述
+
+```sh
+USER_NAME=<YOUR USER NAME>
+DB_NAME=<YOUR DB NAME>
+NODE_ENV=development
+```
+
+.env.localを作成し下記のようにFirebaseの接続情報を記述（＝以降は自身で取得した接続情報を記述）
+
+```sh
+VITE_APP_FIREBASE_API_KEY=
+VITE_APP_FIREBASE_AUTH_DOMAIN=
+VITE_APP_FIREBASE_PROJECT_ID=
+VITE_APP_FIREBASE_STORAGE_BUCKET=
+VITE_APP_FIREBASE_MESSAGE_SENDER_ID=
+VITE_APP_FIREBASE_APP_ID=
+```
+
+ビルドコマンドを実行
+
+```sh
+npm run build
+```
+
+サーバー起動
+
+```sh
+npm run start
+```
+
 
 
