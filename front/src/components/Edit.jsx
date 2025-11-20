@@ -24,16 +24,11 @@ function Edit() {
       );
 
       const JSONWeightData = await weightData.json();
-      console.log(JSONWeightData);
 
       setEditData(JSONWeightData);
     };
     getEditWeightData();
   }, [editValue]);
-
-  useEffect(() => {
-    console.log(editValue);
-  });
 
   const patchWeightData = async (e) => {
     e.preventDefault();
@@ -50,7 +45,6 @@ function Edit() {
         }),
       }
     );
-    console.log('fetch:' + fetchedData);
   };
   return (
     <>
@@ -80,7 +74,9 @@ function Edit() {
                 ref={formEditElement}
                 // defaultValue={editData.weight}
                 value={editData.weight}
-                onChange={(newValue) => setEditData(newValue.weight)}
+                onChange={(e) =>
+                  setEditData({ ...editData, weight: e.target.value })
+                }
               />
             </label>
             <input

@@ -10,8 +10,6 @@ function createWeightService(repository) {
     return await repository.getWeightEditData(param);
   };
   const patchWeightEditData = async (param, bodyData) => {
-    console.log(await repository.patchWeightEditData(param, bodyData));
-
     return await repository.patchWeightEditData(param, bodyData);
   };
   return {

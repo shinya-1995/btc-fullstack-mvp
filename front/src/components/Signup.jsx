@@ -1,8 +1,9 @@
 import { useRef, useState } from 'react';
 import { auth } from '../firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { useAuthContext } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './signup.css';
+import { Link } from 'react-router-dom';
 
 function Signup() {
   const emailRef = useRef(null);
@@ -13,7 +14,6 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
-    console.log(email.value, password.value);
     try {
       await createUserWithEmailAndPassword(auth, email.value, password.value);
       navigate('../home');
@@ -23,33 +23,38 @@ function Signup() {
   };
 
   return (
-    <div style={{ margin: '2em' }}>
-      <h1>ユーザ登録</h1>
+    <div className="layout" style={{ margin: '2em' }}>
+      <h1>ユーザー登録</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>メールアドレス</label>
+          <label className="label">メールアドレス:</label>
           <input
             name="email"
             type="email"
-            placeholder="email"
+            placeholder="Email"
             ref={emailRef}
-            // onChange={(event) => handleChangeEmail(event)}
+            className="input"
           />
         </div>
         <div>
-          <label>パスワード</label>
+          <label className="label">パスワード:</label>
           <input
             name="password"
             type="password"
             ref={emailPassword}
+            className="input"
+            placeholder="password"
             // onChange={(event) => handleChangePassword(event)}
           />
         </div>
-        <div>
+        <div className="button-layout">
           {/* <Link to={'/home'}> */}
-          <button type="submit">登録</button>
+          <button type="submit">登　 録</button>
           {/* </Link> */}
+        </div>
+        <div className="information">
+          ユーザ登録は<Link to={'/login'}>こちら</Link>から
         </div>
       </form>
     </div>

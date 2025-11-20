@@ -44,7 +44,13 @@ function Home() {
               <h2 style={{ marginTop: 30, fontSize: 40 }}>
                 最後に測定した体重
               </h2>
-              <p className="today-data" style={{ fontSize: 70 }}>
+              <p
+                className="today-data"
+                style={{
+                  fontSize: 70,
+                  textDecoration: 'underline rgb(55, 68, 166)',
+                }}
+              >
                 {homeData} kg
               </p>
             </div>
