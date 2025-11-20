@@ -54,7 +54,7 @@ function Signup() {
           {/* </Link> */}
         </div>
         <div className="information">
-          ユーザ登録は<Link to={'/login'}>こちら</Link>から
+          登録済みの方は<Link to={'/login'}>こちら</Link>からログイン
         </div>
       </form>
     </div>
